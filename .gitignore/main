@@ -1,0 +1,51 @@
+#include<ncurses.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include"estru.h"
+#include"altas.h"
+#include"buscar.h"
+#include"bajas.h"
+#include"modificar.h"
+#include"consulta.h"
+
+int main(){
+
+int op,n=0;
+
+        initscr();
+        savetty();
+        start_color();
+   do{  init_pair(1,COLOR_MAGENTA,COLOR_BLACK);
+        attron(COLOR_PAIR(1));
+        clear();
+        printw("\n\n\t******* +M E N U+ *******");
+        printw("\n1) Altas Productos");
+        printw("\n2) Buscar X Nombre Del Producto");
+        printw("\n3) Modificar El Stock Del Producto");
+        printw("\n4) Consulta General");
+        printw("\n5) Bajas");
+        printw("\n6) Salir Del Programa\n");
+        printw("OPCION >> ");
+        scanw("%d",&op);
+
+        switch(op)
+        {
+
+        case 1: altas(); break;
+        case 2: buscar(); break;
+        case 3: modificar(); break;
+        case 4: consulta(); break;
+        case 5: bajas(); break;
+        case 6: printf("\n\tESTAS SALIENDO DEL PROGRAMA...\n\n");
+        break;
+                default: init_pair(1,COLOR_RED,COLOR_BLACK);
+                        attron(COLOR_PAIR(1));
+                        clear();
+                        printw("\n\tWARNING SOLO DEL 1-6 INTENTE DE NUEVO\n\n\t\tPRESS [ENTER]\n");
+                break;
+        }
+                refresh();
+                getch();
+                endwin();
+     }while(op!=6);
+}

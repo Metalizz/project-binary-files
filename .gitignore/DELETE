@@ -44,3 +44,12 @@
               }
 
 
+//bajas.h
+
+#ifndef BAJAS_H
+#define BAJAS_H
+
+
+void bajas();
+
+#endif

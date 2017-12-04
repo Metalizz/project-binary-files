@@ -1,0 +1,41 @@
+#ifndef estru_H
+#define estru_H
+  typedef struct
+  {
+   int CE;
+   char nom[30];
+   float precio;
+
+  }programa;
+
+#endif
+
+
+
+
+
+//MAKEFILE
+
+pro: menu.o altas.o buscar.o modificar.o consulta.o bajas.o -lncurses
+        cc -o pro menu.o altas.o buscar.o modificar.o consulta.o bajas.o -lncurses
+
+menu.o: menu.c estru.h
+        cc -c -g menu.c
+
+altas.o: altas.c altas.h
+        cc -c -g altas.c
+
+buscar.o: buscar.c buscar.h
+        cc -c -g buscar.c
+
+modificar.o: modificar.c modificar.h
+        cc -c -g modificar.c
+
+consulta.o: consulta.c consulta.h
+        cc -c -g consulta.c
+
+bajas.o: bajas.c bajas.h
+        cc -c -g bajas.c
+
+clean:
+        rm *.o *~ pro

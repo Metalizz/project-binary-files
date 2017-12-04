@@ -1,0 +1,58 @@
+#include<stdio.h>
+#include<ncurses.h>
+#include<string.h>
+#include<stdlib.h>
+#include"buscar.h"
+#include"estru.h"
+
+        void buscar()
+        {
+
+        FILE *archivo;
+        programa p;
+        char bus[30];
+        int pos;
+
+                initscr();
+                clear();
+                pos=-1;
+                archivo=fopen("dato.dat","rb");
+                if(archivo==NULL)
+                {
+                 printw("\n\tError al abrir el archivo\n");
+                 exit(1);
+                }
+                 printw("\n\n\t***** B U S C A R - P R O D U C T O S *****\n");
+                 printw("\n\tNombre Del Producto a Buscar: ");
+                 scanw("%s",bus);
+
+                while(fread(&p,sizeof(programa),1,archivo)>0)
+                if(strcasecmp(bus,p.nom)==0)
+                {
+
+                        printw("\n\nNOMBRE DEL PRODUCTO: %s",p.nom);
+                        printw("\nPRECIO DEL PRODUCTO: %.2f",p.precio);
+                        printw("\nCANTIDAD EN EXISTENCIA(STOCK): %d",p.CE);
+                        pos=0;
+
+                }fclose(archivo);
+                if(pos!=0)
+                {
+                 printw("\n\tNO EXISTE\n");
+                }
+//              fclose(archivo);
+                refresh();
+//              getch();
+                endwin();
+}
+
+
+//buscar.h
+#include"estru.h"
+#ifndef buscar_H
+#define buscar_H
+  void buscar();//datos [10], int );
+#endif
+
+
+

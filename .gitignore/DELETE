@@ -1,0 +1,46 @@
+#include<ncurses.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include"estru.h"
+
+                void bajas()
+                {
+
+                        FILE *archivo, *reg;
+                        programa p;
+                        int pos;
+                        char buss[30];
+
+                                initscr();
+                                clear();
+                                init_pair(1,COLOR_RED,COLOR_BLACK);
+                                attron(COLOR_PAIR(1));
+
+                                pos=-1;
+                                archivo=fopen("dato.dat","rb");
+                                if(archivo==NULL)
+                                {
+                                 printw("Error al abrir el archivo\n");
+                                 exit(1);
+                                }
+                                   printw("\n\n\t****** B A J A S *******\n");
+                                   printw("\n\tNombre Del Producto A ELIMINAR: ");
+                                   scanw("%s",buss);
+                                   reg=fopen("registro.dat","wb");
+                                   while(fread(&p,sizeof(programa),1,archivo)>0)
+                                     if(strcasecmp(p.nom,buss)==0)
+                                      {
+                                        fwrite(&p,sizeof(programa),1,reg);
+                                      }
+
+                fclose(reg);
+                fclose(archivo);
+                remove("dato.dat");
+                system("mv registro.dat dato.dat");
+                        refresh();
+                        getch();
+                        endwin();
+              }
+
+

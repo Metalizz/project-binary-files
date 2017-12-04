@@ -1,0 +1,51 @@
+#include<ncurses.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include"estru.h"
+
+void consulta()//datos d[10], int N)
+{
+
+                FILE *archivo;
+                programa p;
+                int ban=0;
+
+                        initscr();
+                        savetty();
+                        start_color();
+                        clear();
+
+                        init_pair(1,COLOR_YELLOW,COLOR_BLACK);
+                        attron(COLOR_PAIR(1));
+                        archivo=fopen("dato.dat","rb");
+                        if(archivo==NULL)
+                        {
+                                printw("\nError al Abrir el Erchivo\n");
+                                exit(1);
+                        }
+                                  printw("\n\n\t****** CONSULTA GENERAL ******\n");
+                                while(fread(&p,sizeof(programa),1,archivo)>0)
+                                {
+                                printw("\n\nNOMBRE DEL PRODUCTO: %s",p.nom);
+                                printw("\nPRECIO DEL PRODUCTO: %.2f",p.precio);
+                                printw("\nCANTIDAD EN EXISTENCIA(STOCK): %d",p.CE);
+                                }
+                        refresh();
+//                      getch();
+                        endwin();
+                        fclose(archivo);
+}
+
+
+
+//consulta.h
+#include"estru.h"
+#ifndef CONSULTA_H
+#define CONSULTA_H
+
+void consulta(); //datos [10], int );
+
+
+#endif
+

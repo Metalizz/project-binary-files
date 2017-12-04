@@ -1,0 +1,59 @@
+#include<ncurses.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include"altas.h"
+#include"estru.h"
+
+        void modificar()
+        {
+        FILE *archivo;
+        programa p;
+        int pos=-1,cam=0,salir;
+        char nombus[30];
+
+                initscr();
+                clear();
+                archivo=fopen("dato.dat","rb+");
+                if(archivo==NULL)
+                {
+                  printw("\nError al Abrir el Erchivo\n");
+                  exit(1);
+                 }
+                        else{
+                printw("\n\n\t***** M O D I F I C A - P R O D U C T O *****\n");
+                printw("\n\tNombre del producto a modificar: ");
+                scanw("%s",nombus);
+                        while(fread(&p,sizeof(programa),1,archivo)>0)
+                           {
+                                if(strcasecmp(nombus,p.nom)==0)
+                                {
+                                pos=cam;
+                                 break;
+                                }
+                           }
+                        }if(pos==-1)
+                                {printw("\n\tNO EXISTE\n");
+                                  }else{
+                                 printw("\nNUEVO PRECIO DEL PRODUCTO: ");
+                                 scanw("%f",&p.precio);
+                                 printw("NUEVO STOCK: ");
+                                 scanw("%d",&p.CE);
+
+                                 fseek(archivo,cam*sizeof(programa),0);
+                                 fwrite(&p,sizeof(programa),1,archivo);
+                        }
+                        fclose(archivo);
+                        refresh();
+                        endwin();
+        }
+
+
+//MODIFICAR.H
+#include"estru.h"
+#ifndef modificar_H
+#define modificar_H
+
+  void modificar(); //datos [10], int *);
+
+#endif

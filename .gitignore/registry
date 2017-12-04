@@ -1,0 +1,54 @@
+#include<stdio.h>
+#include<ncurses.h>
+#include<string.h>
+#include<stdlib.h>
+#include"altas.h"
+#include"estru.h"
+        void altas() //int *n)
+        {
+                FILE *archivo;
+                programa p;
+
+                int x,s,pos;
+                        initscr();
+                        savetty();
+                        start_color();
+
+                        clear();
+                        archivo=fopen("dato.dat","a+");
+                                if(archivo==NULL)
+                                {
+                                  printw("\n\tError al Abrir el Archivo\n");
+                                  exit(1);
+                                }
+                                   pos=-1;
+                                   init_pair(1,COLOR_BLUE,COLOR_BLACK);
+                                   attron(COLOR_PAIR(1));
+                                   printw("\n\n\t***** A L T A S - P R O D U C T O S*****\n");
+                                   do{
+                                 while(fread(&p,sizeof(programa),1,archivo)>0)
+                                  {
+                                        }
+                                        pos=-1;
+                                   if(pos=-1){
+                                       } while(pos!=-1);
+
+                                        printw("\n\nNombre Del Poducto: ");
+                                        scanw("%s",p.nom);
+                                        printw("Precio Del Producto: ");
+                                        scanw("%f",&p.precio);
+                                        printw("Cantidad en existencia(STOCK): ");
+                                        scanw("%d", &p.CE);
+                                        //(*n)++;
+                                        printw("\n\tRegistrar Otro? Si-1 No-2 >> ");
+                                        scanw("%d",&s);
+                                   //}
+                                         fwrite(&p,sizeof(programa),1,archivo);
+                                       }while(s!=2);
+
+                                    fclose(archivo);
+                                    refresh();
+                                    getch();
+                                    endwin();
+        }
+
